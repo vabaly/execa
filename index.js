@@ -15,6 +15,8 @@ const {joinCommand, parseCommand} = require('./lib/command.js');
 const DEFAULT_MAX_BUFFER = 1000 * 1000 * 100;
 
 const getEnv = ({env: envOption, extendEnv, preferLocal, localDir, execPath}) => {
+	// 这里的 process.env 是 Proxy 对象，envOption 可以是字符串，例如 test
+	// { ...'test' } => { 0: 't', 1: 'e', 2: 's', 3: 't' }
 	const env = extendEnv ? {...process.env, ...envOption} : envOption;
 
 	if (preferLocal) {
@@ -72,6 +74,7 @@ const handleOutput = (options, value, error) => {
 };
 
 const execa = (file, args, options) => {
+	// parsed 对象示例可看 ./parsed-demo.jsonc
 	const parsed = handleArgs(file, args, options);
 	const command = joinCommand(file, args);
 

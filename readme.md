@@ -3,22 +3,22 @@
 
 [![Build Status](https://travis-ci.org/sindresorhus/execa.svg?branch=master)](https://travis-ci.org/sindresorhus/execa) [![Coverage Status](https://coveralls.io/repos/github/sindresorhus/execa/badge.svg?branch=master)](https://coveralls.io/github/sindresorhus/execa?branch=master)
 
-> Process execution for humans
+> Process execution for humans（人性化地执行命令行处理程序）
 
-## Why
+## Why（为什么使用 `execa`）
 
-This package improves [`child_process`](https://nodejs.org/api/child_process.html) methods with:
+This package improves [`child_process`](https://nodejs.org/api/child_process.html) methods with:（这个库是用来增强 [`child_process`](https://nodejs.org/api/child_process.html) 方法的：）
 
-- Promise interface.
-- [Strips the final newline](#stripfinalnewline) from the output so you don't have to do `stdout.trim()`.
-- Supports [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) binaries cross-platform.
-- [Improved Windows support.](https://github.com/IndigoUnited/node-cross-spawn#why)
-- Higher max buffer. 100 MB instead of 200 KB.
-- [Executes locally installed binaries by name.](#preferlocal)
-- [Cleans up spawned processes when the parent process dies.](#cleanup)
+- Promise interface.（Promise 的接口）
+- [Strips the final newline](#stripfinalnewline) from the output so you don't have to do `stdout.trim()`.（默认去除输出的最后一个空行，相当于执行了 `stdout.trim()`）
+- Supports [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) binaries cross-platform.（支持跨平台的 [shebang](https://zh.wikipedia.org/wiki/Shebang) 可执行文件，即文件头部带有 `#!<解释器，如/bin/sh>` 的文件）
+- [Improved Windows support.](https://github.com/IndigoUnited/node-cross-spawn#why)（增强对 `windows` 系统的支持，具体解决了什么问题可以查看[这个仓库](https://github.com/IndigoUnited/node-cross-spawn#why)，此仓库没有专门研究，留下 `Todo` 的标志）
+- Higher max buffer. 100 MB instead of 200 KB.（提高 `buffer` 对象的最大容量，从 200KB 提高到 100MB）
+- [Executes locally installed binaries by name.](#preferlocal)（可以直接运行项目本地的 NPM 包，比如 `execa('webpack')`）
+- [Cleans up spawned processes when the parent process dies.](#cleanup)（当父进程被杀死时，会自动清理此进程的衍生进程）
 - [Get interleaved output](#all) from `stdout` and `stderr` similar to what is printed on the terminal. [*(Async only)*](#execasyncfile-arguments-options)
-- [Can specify file and arguments as a single string without a shell](#execacommandcommand-options)
-- More descriptive errors.
+- [Can specify file and arguments as a single string without a shell](#execacommandcommand-options)（命令也可以写成一串字符串）
+- More descriptive errors.（提供更多有效的错误信息）
 
 ## Install
 
